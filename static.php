@@ -735,6 +735,10 @@ if ($debug=="true") {
 	}
 }
 // END MYSQL
+else {
+	echo "Le paramètre db_type est mal renseigné".PHP_EOL;
+	exit();
+}
 
 /*
  *
