@@ -21,8 +21,11 @@ StatIC-WeeWX
 ### Installation de git et php
 Git est un logiciel permettant de cloner rapidement les deux fichiers nécessaires au fonctionnement de ce script.
 PHP (php-cli dans notre cas) va permettre d'exécuter le script.
+Il peut également être nécéssaire d'intaller le paquet ``php-sqlite3`` si vous utilisez une base de données SQLite sur votre instance de WeeWX
 ```
 sudo apt update && sudo apt install git php-cli
+## Facultatif :
+sudo apt install php-sqlite3
 ```
 ### Copie des fichiers
 Se placer dans un premier temps dans le répertoire ou l'on veut copier le script, puis cloner le répertoire
@@ -112,7 +115,7 @@ Pour lancer le script en ligne de commande sans le mode debug :
 php /home/pi/StatIC-WeeWX/static.php --debug=false
 ```
 
-Pour lancer le script en ligne de commande et avec le mode debug (permettant notamment d'élucider certains problèmes liés au paramètre de timezone :
+Pour lancer le script en ligne de commande et avec le mode debug (permettant notamment d'élucider certains problèmes liés au paramètre de timezone) :
 ```
 php /home/pi/StatIC-WeeWX/static.php --debug=true
 ```
@@ -126,7 +129,7 @@ crontab -e
 ```
 Puis ajouter :
 ```
-*/10 * * * * sleep 45 && php /home/scripts/static.php
+*/10 * * * * sleep 45 && php /home/pi/StatIC-WeeWX/static.php --debug=false
 ```
 ``sleep 45`` permet d'attendre 45 secondes avant de lancer le script, afin de laisser le temps à WeeWX de procéder à l'enregistrement en base de données du dernier relevé.
 
