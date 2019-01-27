@@ -3,12 +3,21 @@ StatIC-WeeWX
 ============
 
 ## Préambule
+
+**Description**  
  Script permettant de générer un fichier texte pour le réseau StatIC de l'association Infoclimat pour une intégration à leur réseau d'une station météo (Davis VP2, Vue, ou Oregon WMR300) fonctionnant sous le logiciel WeeWX sur une base de données SQLite ou MySQL.
 
- > **Note :** Le script est capable de trouver automatiquement le système d'unité utilisé dans la BDD, et convertit les valeurs si nécessaire.
- > Il fonctionne avec les deux principaux types de base de données suppostés par WeeWX : SQLite (BDD par défaut) et MySQL.
+**Système d'unité utilisé**  
+Le script est capable de trouver automatiquement le système d'unité utilisé dans la BDD, et convertit les valeurs si nécessaire en système métrique.
+Il fonctionne avec les deux principaux types de base de données suppostés par WeeWX : SQLite (BDD par défaut) et MySQL.
 
- La fonction utilisée pour la moyenne d'angles est inspirée de : https://gist.github.com/carloscabo/96e70853f1bb6b6a4d33e4c5c90c6cbb
+**Envoi FTP vers www.infoclimat.fr**  
+Si le script détecte que le dernier enregistrement disponible en BDD est agé de plus de 20 minutes, alors le fichier n'est pas envoyé sur le FTP d'Infoclimat.
+En clair, si WeeWX s'arrète pour une raison quelconque, le script arrête également d'envoyer le fichier à Infoclimat puisqu'il est identique.
+
+**Moyenne angulaire pour la direction du vent**  
+La direction moyenne du vent sur 10 minutes nécéssite de faire une moyenne angulaire, et non une moyenne "traditionnelle". 
+La fonction utilisée pour la moyenne d'angles est inspirée de : https://gist.github.com/carloscabo/96e70853f1bb6b6a4d33e4c5c90c6cbb
 
 ## Requis
 * Une station météo fonctionnant déjà avec Weewx
