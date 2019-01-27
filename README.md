@@ -5,23 +5,24 @@ StatIC-WeeWX
 ## Préambule
 
 **Description**  
- Script permettant de générer un fichier texte pour le réseau StatIC de l'association Infoclimat pour une intégration à leur réseau d'une station météo (Davis VP2, Vue, ou Oregon WMR300) fonctionnant sous le logiciel WeeWX sur une base de données SQLite ou MySQL.
+Ce script permet de produire un fichier texte contenant les dernières données de votre station météo, afin de l'intégrer au réseau StatIC de l'association Infoclimat. Ce script est fait pour les stations fonctionnant sous le logiciel WeeWX, sur une base de données SQLite ou MySQL. Le réseau StatIC d'Infoclimat accepte à ce jour les stations Davis Instruments Vantage Pro 2 et Vantage Vue, ainsi que les stations Oregon Scientific WMR300.
 
-**Système d'unité utilisé**  
-Le script est capable de trouver automatiquement le système d'unité utilisé dans la BDD, et convertit les valeurs si nécessaire en système métrique.
-Il fonctionne avec les deux principaux types de base de données suppostés par WeeWX : SQLite (BDD par défaut) et MySQL.
+**Système d'unités utilisé**  
+Le script est capable de trouver automatiquement le système d'unités utilisé dans la BDD, et convertit les valeurs si nécessaires en système métrique.
+Il fonctionne avec les deux principaux types de bases de données supportés par WeeWX : SQLite (BDD par défaut) et MySQL.
 
 **Envoi FTP vers www.infoclimat.fr**  
-Si le script détecte que le dernier enregistrement disponible en BDD est agé de plus de 20 minutes, alors le fichier n'est pas envoyé sur le FTP d'Infoclimat.
-En clair, si WeeWX s'arrète pour une raison quelconque, le script arrête également d'envoyer le fichier à Infoclimat puisqu'il est identique.
+Si le script détecte que le dernier enregistrement disponible en BDD est âgé de plus de 20 minutes, alors le fichier n'est pas envoyé sur le FTP d'Infoclimat.
+En clair, si WeeWX s'arrête pour une raison quelconque, le script arrête également d'envoyer le fichier à Infoclimat puisqu'il est identique.
 
 **Moyenne angulaire pour la direction du vent**  
-La direction moyenne du vent sur 10 minutes nécéssite de faire une moyenne angulaire, et non une moyenne "traditionnelle". 
+La direction moyenne du vent sur 10 minutes nécessite de faire une moyenne angulaire, et non une moyenne "traditionnelle". 
 La fonction utilisée pour la moyenne d'angles est inspirée de : https://gist.github.com/carloscabo/96e70853f1bb6b6a4d33e4c5c90c6cbb
 
 ## Requis
 * Une station météo fonctionnant déjà avec Weewx
 	* Cette installation de WeeWX (sur un Raspberry Pi, ou autre) peut stocker les données dans une base de données SQLite ou MySQL
+	* Cette installation de WeeWX peut utiliser n'importe quel système d'unités, le script détectera l'unité et fera les conversions nécessaires
 * Un accès en ligne de commande à votre Raspberry Pi. Si vous avez installé WeeWX ce ne devrait pas être un souci
 * Un accès FTP sur Infoclimat (en faire la demande explicite lors de la demande d'intégration au réseau StatIC - les identifiants vous sont ensuite fournis par l'équipe)
 
@@ -33,7 +34,7 @@ PHP (php-cli dans notre cas) va permettre d'exécuter le script.
 Il peut également être nécéssaire d'intaller le paquet ``php-sqlite3`` si vous utilisez une base de données SQLite sur votre instance de WeeWX
 ```
 sudo apt update && sudo apt install git php-cli
-## Facultatif :
+## Si utilisation de SQLite, ajouter :
 sudo apt install php-sqlite3
 ```
 ### Copie des fichiers
