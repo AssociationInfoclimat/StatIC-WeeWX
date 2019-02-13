@@ -150,3 +150,6 @@ Puis ajouter :
 	* Arrondi des UV et rayonnement solaire
 	* Ajout de la fonction de détection auto de l'unité pour la partie MySQL
 	* Ajout du cumul horaire pluie_cumul_1h
+
+* V2.1 - 2019.02.13
+	* Correctif pour l'UV qui était *trop* arrondi

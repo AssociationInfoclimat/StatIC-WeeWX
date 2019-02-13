@@ -21,7 +21,7 @@ require_once "config.php";
 
 
 // VERSION - NE PAS MODIFIER !!
-	$version = "weewx-".$db_type."-2.0";
+	$version = "weewx-".$db_type."-2.1";
 
 // Fuseau horaire du script
 	$datetimeNow = date('Y-m-d H:i:s');
@@ -147,7 +147,7 @@ if ($debug=="true") {
 	if($row[21] == null){
 		$uv = '';
 	}else{
-		$uv = round($row[21],0);
+		$uv = round($row[21],1);
 	}
 
 /*
@@ -498,7 +498,7 @@ if ($debug=="true") {
 	if($row[21] == null){
 		$uv = '';
 	}else{
-		$uv = round($row[21],0);
+		$uv = round($row[21],1);
 	}
 
 
