@@ -84,7 +84,7 @@ if ($debug=="true") {
  */
 
 // temperature
-	if ($row[7] == null){
+	if ($row[7] === null){
 		$temp = '';
 	}else{
 		if ($unit=='1') {
@@ -95,7 +95,7 @@ if ($debug=="true") {
 	}
 
 // pression
-	if ($row[3] == null){
+	if ($row[3] === null){
 		$pression = '';
 	}else{
 		if ($unit=='1') {
@@ -106,14 +106,14 @@ if ($debug=="true") {
 	}
 
 // hygro
-	if ($row[9] == null){
+	if ($row[9] === null){
 		$hygro = '';
 	}else{
 		$hygro = round($row[9],1);
 	}
 
 // dewpoint
-	if($row[16] == null){
+	if($row[16] === null){
 		$dewpoint = '';
 	}else{
 		if ($unit=='1') {
@@ -124,7 +124,7 @@ if ($debug=="true") {
 	}
 
 // intensite pluie
-	if ($row[14] == null){
+	if ($row[14] === null){
 		$rainrate = '';
 	}else{
 		if ($unit=='1') {
@@ -137,14 +137,14 @@ if ($debug=="true") {
 	}
 
 // rayonnement solaire
-	if ($row[20] == null){
+	if ($row[20] === null){
 		$solar = '';
 	}else{
 		$solar = round($row[20],0);
 	}
 
 // rayonnement UV
-	if($row[21] == null){
+	if($row[21] === null){
 		$uv = '';
 	}else{
 		$uv = round($row[21],1);
@@ -158,7 +158,7 @@ if ($debug=="true") {
 	$sql = "SELECT AVG(windSpeed) FROM $db_table_sqlite WHERE dateTime >= '$minutes10' AND dateTime <= '$stop';";
 	$res = $db_handle->query($sql);
 	$row = $res->fetchArray();
-	if($row[0] == null){
+	if($row[0] === null){
 		$avg_wind_10 = '';
 	}else{
 		$avg_wind_10 = round($row[0],1);
@@ -213,7 +213,7 @@ if ($debug=="true") {
 	$avg_windDir_10_check = mean_of_angles($windDirArray);
 
 // Vérification du résultat et arrondi
-	if($avg_windDir_10_check == null){
+	if($avg_windDir_10_check === null){
 		$avg_windDir_10 = '';
 	}else{
 		$avg_windDir_10 = round($avg_windDir_10_check,1);
@@ -224,7 +224,7 @@ if ($debug=="true") {
 	$res = $db_handle->query($sql);
 	$row = $res->fetchArray();
 	$max_windGust_10_check = $row[0];
-	if($max_windGust_10_check == null){
+	if($max_windGust_10_check === null){
 		$max_windGust_10 = '';
 	}else{
 		if ($unit=='1') {
@@ -246,7 +246,7 @@ if ($debug=="true") {
 	$res = $db_handle->query($sql);
 	$row = $res->fetchArray();
 	$max_rainRate_hour_check = $row[0];
-	if($max_rainRate_hour_check == null){
+	if($max_rainRate_hour_check === null){
 		$max_rainRate_hour = '';
 	}else{
 		if ($unit=='1') {
@@ -271,7 +271,7 @@ if ($debug=="true") {
 	$res = $db_handle->query($sql);
 	$row = $res->fetchArray();
 	$cumul_rain_hour_check = $row[0];
-	if($cumul_rain_hour_check == null){
+	if($cumul_rain_hour_check === null){
 		$cumul_rain_hour = '';
 	}else{
 		if ($unit=='1') {
@@ -289,7 +289,7 @@ if ($debug=="true") {
 	$res = $db_handle->query($sql);
 	$row = $res->fetchArray();
 	$cumul_rain_today_check = $row[0];
-	if($cumul_rain_today_check == null){
+	if($cumul_rain_today_check === null){
 		$cumul_rain_today = '';
 	}else{
 		if ($unit=='1') {
@@ -316,7 +316,7 @@ if ($debug=="true") {
 	$res = $db_handle->query($sql);
 	$row = $res->fetchArray();
 	$cumul_rain_year_check = $row[0];
-	if($cumul_rain_year_check == null){
+	if($cumul_rain_year_check === null){
 		$cumul_rain_year = '';
 	}else{
 		if ($unit=='1') {
@@ -334,7 +334,7 @@ if ($debug=="true") {
 	$row = $res->fetchArray();
 	$max_rainRate_today_check = $row[1];
 
-	if($max_rainRate_today_check == null){
+	if($max_rainRate_today_check === null){
 		$max_rainRate_today = '';
 		$max_rainRate_todayTime = '';
 	}else{
@@ -354,7 +354,7 @@ if ($debug=="true") {
 	$row = $res->fetchArray();
 	$max_temp_today_check = $row[1];
 
-	if($max_temp_today_check == null){
+	if($max_temp_today_check === null){
 		$max_temp_today = '';
 		$max_temp_todayTime = '';
 	}else{
@@ -372,7 +372,7 @@ if ($debug=="true") {
 	$row = $res->fetchArray();
 	$min_temp_today_check = $row[1];
 
-	if($min_temp_today_check == null){
+	if($min_temp_today_check === null){
 		$min_temp_today = '';
 		$min_temp_todayTime = '';
 	}else{
@@ -435,7 +435,7 @@ if ($debug=="true") {
  */
 
 // temperature
-	if ($row[7] == null){
+	if ($row[7] === null){
 		$temp = '';
 	}else{
 		if ($unit=='1') {
@@ -446,7 +446,7 @@ if ($debug=="true") {
 	}
 
 // pression
-	if ($row[3] == null){
+	if ($row[3] === null){
 		$pression = '';
 	}else{
 		if ($unit=='1') {
@@ -457,14 +457,14 @@ if ($debug=="true") {
 	}
 
 // hygro
-	if ($row[9] == null){
+	if ($row[9] === null){
 		$hygro = '';
 	}else{
 		$hygro = round($row[9],1);
 	}
 
 // dewpoint
-	if($row[16] == null){
+	if($row[16] === null){
 		$dewpoint = '';
 	}else{
 		if ($unit=='1') {
@@ -475,7 +475,7 @@ if ($debug=="true") {
 	}
 
 // intensite pluie
-	if ($row[14] == null){
+	if ($row[14] === null){
 		$rainrate = '';
 	}else{
 		if ($unit=='1') {
@@ -488,14 +488,14 @@ if ($debug=="true") {
 	}
 
 // rayonnement solaire
-	if ($row[20] == null){
+	if ($row[20] === null){
 		$solar = '';
 	}else{
 		$solar = round($row[20],0);
 	}
 
 // rayonnement UV
-	if($row[21] == null){
+	if($row[21] === null){
 		$uv = '';
 	}else{
 		$uv = round($row[21],1);
@@ -506,7 +506,7 @@ if ($debug=="true") {
 	$sql = "SELECT AVG(windSpeed) FROM $db_name.$db_table_mysql WHERE dateTime >= '$minutes10' AND dateTime <= '$stop';";
 	$res = $con->query($sql);
 	$row = mysqli_fetch_row($res);
-	if($row[0] == null){
+	if($row[0] === null){
 		$avg_wind_10 = '';
 	}else{
 		$avg_wind_10 = round($row[0],1);
@@ -562,7 +562,7 @@ if ($debug=="true") {
 	$avg_windDir_10_check = mean_of_angles($windDirArray);
 
 // Vérification du résultat et arrondi
-	if($avg_windDir_10_check == null){
+	if($avg_windDir_10_check === null){
 		$avg_windDir_10 = '';
 	}else{
 		$avg_windDir_10 = round($avg_windDir_10_check,1);
@@ -573,7 +573,7 @@ if ($debug=="true") {
 	$res = $con->query($sql);
 	$row = mysqli_fetch_row($res);
 	$max_windGust_10_check = $row[0];
-	if($max_windGust_10_check == null){
+	if($max_windGust_10_check === null){
 		$max_windGust_10 = '';
 	}else{
 		if ($unit=='1') {
@@ -595,7 +595,7 @@ if ($debug=="true") {
 	$res = $con->query($sql);
 	$row = mysqli_fetch_row($res);
 	$max_rainRate_hour_check = $row[0];
-	if($max_rainRate_hour_check == null){
+	if($max_rainRate_hour_check === null){
 		$max_rainRate_hour = '';
 	}else{
 		if ($unit=='1') {
@@ -620,7 +620,7 @@ if ($debug=="true") {
 	$res = $con->query($sql);
 	$row = mysqli_fetch_row($res);
 	$cumul_rain_hour_check = $row[0];
-	if($cumul_rain_hour_check == null){
+	if($cumul_rain_hour_check === null){
 		$cumul_rain_hour = '';
 	}else{
 		if ($unit=='1') {
@@ -639,7 +639,7 @@ if ($debug=="true") {
 	$res = $con->query($sql);
 	$row = mysqli_fetch_row($res);
 	$cumul_rain_today_check = $row[0];
-	if($cumul_rain_today_check == null){
+	if($cumul_rain_today_check === null){
 		$cumul_rain_today = '';
 	}else{
 		if ($unit=='1') {
@@ -666,7 +666,7 @@ if ($debug=="true") {
 	$res = $con->query($sql);
 	$row = mysqli_fetch_row($res);
 	$cumul_rain_year_check = $row[0];
-	if($cumul_rain_year_check == null){
+	if($cumul_rain_year_check === null){
 		$cumul_rain_year = '';
 	}else{
 		if ($unit=='1') {
@@ -684,7 +684,7 @@ if ($debug=="true") {
 	$row = mysqli_fetch_row($res);
 	$max_rainRate_today_check = $row[1];
 
-	if($max_rainRate_today_check == null){
+	if($max_rainRate_today_check === null){
 		$max_rainRate_today = '';
 		$max_rainRate_todayTime = '';
 	}else{
@@ -704,7 +704,7 @@ if ($debug=="true") {
 	$row = mysqli_fetch_row($res);
 	$max_temp_today_check = $row[1];
 
-	if($max_temp_today_check == null){
+	if($max_temp_today_check === null){
 		$max_temp_today = '';
 		$max_temp_todayTime = '';
 	}else{
@@ -722,7 +722,7 @@ if ($debug=="true") {
 	$row = mysqli_fetch_row($res);
 	$min_temp_today_check = $row[1];
 
-	if($min_temp_today_check == null){
+	if($min_temp_today_check === null){
 		$min_temp_today = '';
 		$min_temp_todayTime = '';
 	}else{
