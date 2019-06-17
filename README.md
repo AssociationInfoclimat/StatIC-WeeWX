@@ -143,6 +143,38 @@ Puis ajouter :
 ```
 ``sleep 45`` permet d'attendre 45 secondes avant de lancer le script, afin de laisser le temps à WeeWX de procéder à l'enregistrement en base de données du dernier relevé.
 
+## Mise à jour du script
+
+Ce script peut subir des modifications, visant à apporter des correctifs de bugs, ou des améliorations pour une meilleure intégration de vos données sur le site Infoclimat.
+
+Dans ce cas, si le script est modifié après que vous l'ayez installé, il faudra suivre la procédure ci-après pour profiter des dernières mises à jour.
+Cette manipulation permet de conserver une copie du fichier de configuration ``config.php``.
+
+Il faudra adapter les commandes suivantes à votre configuration (emplacement du script).
+
+Se déplacer dans le répertoire parent du script :
+```
+cd /home/pi/
+```
+
+Puis déplacer l'actuel dossier vers un autre répertoire (dans le but de ne pas perdre le fichier de configuration) :
+```
+mv StatIC-WeeWX StatIC-WeeWX.old
+```
+
+Récupération de la nouvelle version du script :
+```
+git clone https://github.com/AssociationInfoclimat/StatIC-WeeWX.git
+```
+
+Copie de la sauvegarde du fichier de configuration ``config.php`` dans le nouveau répertoire :
+```
+cp StatIC-WeeWX.old/config.php StatIC-WeeWX/config.php
+```
+
+C'est tout, le script est de nouveau fonctionnel !
+
+
 ## Changelog
 
 * V2.0 - 2018.11.01
@@ -153,3 +185,11 @@ Puis ajouter :
 
 * V2.1 - 2019.02.13
 	* Correctif pour l'UV qui était *trop* arrondi
+
+* V2.2 - 2019.06.09
+	* Correctif opérateur de comparaison (remplacement des ``==`` par ``===``)
+	* Correctif du problème de vent lorsqu'égal à 0, qui était pris comme NULL au lieu de direction Nord
+
+* V2.3 - 2019.06.13
+	* Correctif sur les requetes SQL pour constituer un tableau associatif plutôt qu'un index numérique (remplacement des ``$row[1]`` par ``$row['nomDeLaColonne']``) => plus propre
+	* Ajout de la procédure de MAJ dans le README
