@@ -45,18 +45,18 @@ if ($db_type === "sqlite") {
 	$query_string = "SELECT * FROM $db_table_sqlite ORDER BY dateTime DESC LIMIT 1;";
 	$db_handle->exec($query_string);
 	$result = $db_handle->query($query_string);
-	$row = $result->fetchArray();
+	$row = $result->fetchArray(MYSQLI_ASSOC);
 
 // Détermination du système d'unité utilisé dans la BDD
 // 1 = US ; 16 = METRIC ; 17 = METRICWX
-	$unit=$row[1];
+	$unit=$row['usUnits'];
 	if ($debug=="true") {
 		echo "Version script : ".$version.PHP_EOL;
 		echo "Unite BDD : ".$unit.PHP_EOL.PHP_EOL;
 	}
 
 // Établissement des timestamp stop et start
-	$stop=$row[0];
+	$stop=$row['dateTime'];
 	$minutes10=$stop-(600);
 	$minutes60=$stop-(3600);
 
@@ -84,70 +84,70 @@ if ($debug=="true") {
  */
 
 // temperature
-	if ($row[7] === null){
+	if ($row['outTemp'] === null){
 		$temp = '';
 	}else{
 		if ($unit=='1') {
-			$temp = round(($row[7]-32)/1.8,1);
+			$temp = round(($row['outTemp']-32)/1.8,1);
 		}elseif ($unit=='16' OR $unit=='17') {
-			$temp = round($row[7],1);
+			$temp = round($row['outTemp'],1);
 		}
 	}
 
 // pression
-	if ($row[3] === null){
+	if ($row['barometer'] === null){
 		$pression = '';
 	}else{
 		if ($unit=='1') {
-			$pression = round($row[3]*33.8639,1);
+			$pression = round($row['barometer']*33.8639,1);
 		}elseif ($unit=='16' OR $unit=='17') {
-			$pression = round($row[3],1);
+			$pression = round($row['barometer'],1);
 		}
 	}
 
 // hygro
-	if ($row[9] === null){
+	if ($row['outHumidity'] === null){
 		$hygro = '';
 	}else{
-		$hygro = round($row[9],1);
+		$hygro = round($row['outHumidity'],1);
 	}
 
 // dewpoint
-	if($row[16] === null){
+	if($row['dewpoint'] === null){
 		$dewpoint = '';
 	}else{
 		if ($unit=='1') {
-			$dewpoint = round(($row[16]-32)/1.8,1);
+			$dewpoint = round(($row['dewpoint']-32)/1.8,1);
 		}elseif ($unit=='16' OR $unit=='17') {
-			$dewpoint = round($row[16],1);
+			$dewpoint = round($row['dewpoint'],1);
 		}
 	}
 
 // intensite pluie
-	if ($row[14] === null){
+	if ($row['rainRate'] === null){
 		$rainrate = '';
 	}else{
 		if ($unit=='1') {
-			$rainrate = round($row[14]*25.4,1);
+			$rainrate = round($row['rainRate']*25.4,1);
 		}elseif ($unit=='16') {
-			$rainrate = round($row[14]*10,1);
+			$rainrate = round($row['rainRate']*10,1);
 		}elseif ($unit=='17') {
-			$rainrate = round($row[14],1);
+			$rainrate = round($row['rainRate'],1);
 		}
 	}
 
 // rayonnement solaire
-	if ($row[20] === null){
+	if ($row['radiation'] === null){
 		$solar = '';
 	}else{
-		$solar = round($row[20],0);
+		$solar = round($row['radiation'],0);
 	}
 
 // rayonnement UV
-	if($row[21] === null){
+	if($row['UV'] === null){
 		$uv = '';
 	}else{
-		$uv = round($row[21],1);
+		$uv = round($row['UV'],1);
 	}
 
 /*
@@ -397,18 +397,18 @@ elseif ($db_type === "mysql") {
 // Récupération du dernier relevé dispo en BDD
 	$sql = "SELECT * FROM $db_name.$db_table_mysql ORDER BY dateTime DESC LIMIT 1;";
 	$res= $con->query($sql);
-	$row = mysqli_fetch_row($res);
+	$row = mysqli_fetch_assoc($res);
 
 // Détermination du système d'unité utilisé dans la BDD
 // 1 = US ; 16 = METRIC ; 17 = METRICWX
-	$unit=$row[1];
+	$unit=$row['usUnits'];
 	if ($debug=="true") {
 		echo "Version script : ".$version.PHP_EOL;
 		echo "Unite BDD : ".$unit.PHP_EOL.PHP_EOL;
 	}
 
 // Établissement des timestamp stop et start
-	$stop=$row[0];
+	$stop=$row['dateTime'];
 	$minutes10=$stop-(600);
 	$minutes60=$stop-(3600);
 
@@ -435,70 +435,70 @@ if ($debug=="true") {
  */
 
 // temperature
-	if ($row[7] === null){
+	if ($row['outTemp'] === null){
 		$temp = '';
 	}else{
 		if ($unit=='1') {
-			$temp = round(($row[7]-32)/1.8,1);
+			$temp = round(($row['outTemp']-32)/1.8,1);
 		}elseif ($unit=='16' OR $unit=='17') {
-			$temp = round($row[7],1);
+			$temp = round($row['outTemp'],1);
 		}
 	}
 
 // pression
-	if ($row[3] === null){
+	if ($row['barometer'] === null){
 		$pression = '';
 	}else{
 		if ($unit=='1') {
-			$pression = round($row[3]*33.8639,1);
+			$pression = round($row['barometer']*33.8639,1);
 		}elseif ($unit=='16' OR $unit=='17') {
-			$pression = round($row[3],1);
+			$pression = round($row['barometer'],1);
 		}
 	}
 
 // hygro
-	if ($row[9] === null){
+	if ($row['outHumidity'] === null){
 		$hygro = '';
 	}else{
-		$hygro = round($row[9],1);
+		$hygro = round($row['outHumidity'],1);
 	}
 
 // dewpoint
-	if($row[16] === null){
+	if($row['dewpoint'] === null){
 		$dewpoint = '';
 	}else{
 		if ($unit=='1') {
-			$dewpoint = round(($row[16]-32)/1.8,1);
+			$dewpoint = round(($row['dewpoint']-32)/1.8,1);
 		}elseif ($unit=='16' OR $unit=='17') {
-			$dewpoint = round($row[16],1);
+			$dewpoint = round($row['dewpoint'],1);
 		}
 	}
 
 // intensite pluie
-	if ($row[14] === null){
+	if ($row['rainRate'] === null){
 		$rainrate = '';
 	}else{
 		if ($unit=='1') {
-			$rainrate = round($row[14]*25.4,1);
+			$rainrate = round($row['rainRate']*25.4,1);
 		}elseif ($unit=='16') {
-			$rainrate = round($row[14]*10,1);
+			$rainrate = round($row['rainRate']*10,1);
 		}elseif ($unit=='17') {
-			$rainrate = round($row[14],1);
+			$rainrate = round($row['rainRate'],1);
 		}
 	}
 
 // rayonnement solaire
-	if ($row[20] === null){
+	if ($row['radiation'] === null){
 		$solar = '';
 	}else{
-		$solar = round($row[20],0);
+		$solar = round($row['radiation'],0);
 	}
 
 // rayonnement UV
-	if($row[21] === null){
+	if($row['UV'] === null){
 		$uv = '';
 	}else{
-		$uv = round($row[21],1);
+		$uv = round($row['UV'],1);
 	}
 
 
