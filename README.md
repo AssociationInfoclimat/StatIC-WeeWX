@@ -193,3 +193,6 @@ C'est tout, le script est de nouveau fonctionnel !
 * V2.3 - 2019.06.13
 	* Correctif sur les requetes SQL pour constituer un tableau associatif plutôt qu'un index numérique (remplacement des ``$row[1]`` par ``$row['nomDeLaColonne']``) => plus propre
 	* Ajout de la procédure de MAJ dans le README
+
+* V2.4 - 2019.11.05
+	* Correctif sur le tableau associatif pour la version SQLite --> la version 2.3 du script renvoyait systématiquement une erreur en utilisation avec SQLite.
