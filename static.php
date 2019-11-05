@@ -45,7 +45,7 @@ if ($db_type === "sqlite") {
 	$query_string = "SELECT * FROM $db_table_sqlite ORDER BY dateTime DESC LIMIT 1;";
 	$db_handle->exec($query_string);
 	$result = $db_handle->query($query_string);
-	$row = $result->fetchArray(MYSQLI_ASSOC);
+	$row = $result->fetchArray(SQLITE3_ASSOC);
 
 // Détermination du système d'unité utilisé dans la BDD
 // 1 = US ; 16 = METRIC ; 17 = METRICWX
