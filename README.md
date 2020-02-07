@@ -5,7 +5,7 @@ StatIC-WeeWX
 ## Préambule
 
 **Description**  
-Ce script permet de produire un fichier texte contenant les dernières données de votre station météo, afin de l'intégrer au réseau StatIC de l'association Infoclimat. Ce script est fait pour les stations fonctionnant sous le logiciel WeeWX, sur une base de données SQLite ou MySQL. Le réseau StatIC d'Infoclimat accepte à ce jour les stations Davis Instruments Vantage Pro 2 et Vantage Vue, ainsi que les stations Oregon Scientific WMR300.
+Ce script permet de produire un fichier texte contenant les dernières données de votre station météo, afin de l'intégrer au réseau StatIC de l'association Infoclimat. Ce script est fait pour les stations fonctionnant sous le logiciel WeeWX, sur une base de données SQLite ou MySQL. Le réseau StatIC d'Infoclimat accepte à ce jour les stations Davis Instruments Vantage Pro 2 et Vantage Vue.
 
 **Système d'unités utilisé**  
 Le script est capable de trouver automatiquement le système d'unités utilisé dans la BDD, et convertit les valeurs si nécessaires en système métrique.
