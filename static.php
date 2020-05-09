@@ -155,7 +155,7 @@ if ($debug=="true") {
  */
 
 // Récupération et calcul de la vitesse moyenne du vent moyen des 10 dernières minutes
-	$sql = "SELECT AVG(windSpeed) FROM $db_table_sqlite WHERE dateTime >= '$minutes10' AND dateTime <= '$stop';";
+	$sql = "SELECT AVG(windSpeed) FROM $db_table_sqlite WHERE dateTime >= '$minutes10' AND dateTime < '$stop';";
 	$res = $db_handle->query($sql);
 	$row = $res->fetchArray();
 	if($row[0] === null){
@@ -202,7 +202,7 @@ if ($debug=="true") {
 // Récupération des valeurs de direction du vent moyen des 10 dernières minutes
 // Requete + mise en tableau de la réponse
 	$windDirArray = array();
-	$res = $db_handle->query("SELECT windDir FROM $db_table_sqlite WHERE dateTime >= '$minutes10' AND dateTime <= '$stop'");
+	$res = $db_handle->query("SELECT windDir FROM $db_table_sqlite WHERE dateTime >= '$minutes10' AND dateTime < '$stop'");
 	while ($row=$res->fetchArray(SQLITE3_ASSOC)) {
 		if (!is_null ($row['windDir'])) {
 			$windDirArray[] = $row['windDir'];
@@ -220,7 +220,7 @@ if ($debug=="true") {
 	}
 
 // Détermination de la rafale max des 10 dernières minutes
-	$sql = "SELECT max(windGust) FROM $db_table_sqlite WHERE dateTime >= '$minutes10' AND dateTime <= '$stop';";
+	$sql = "SELECT max(windGust) FROM $db_table_sqlite WHERE dateTime >= '$minutes10' AND dateTime < '$stop';";
 	$res = $db_handle->query($sql);
 	$row = $res->fetchArray();
 	$max_windGust_10_check = $row[0];
@@ -242,7 +242,7 @@ if ($debug=="true") {
  */
 
 // Intensite pluie max sur 1 heure
-	$sql = "SELECT max(rainRate) FROM $db_table_sqlite WHERE dateTime >= '$minutes60' AND dateTime <= '$stop';";
+	$sql = "SELECT max(rainRate) FROM $db_table_sqlite WHERE dateTime >= '$minutes60' AND dateTime < '$stop';";
 	$res = $db_handle->query($sql);
 	$row = $res->fetchArray();
 	$max_rainRate_hour_check = $row[0];
@@ -267,7 +267,7 @@ if ($debug=="true") {
  */
 
 // Cumul pluie sur l'heure glissante
-	$sql = "SELECT sum(rain) FROM $db_table_sqlite WHERE dateTime >= '$minutes60' AND dateTime <= '$stop';";
+	$sql = "SELECT sum(rain) FROM $db_table_sqlite WHERE dateTime >= '$minutes60' AND dateTime < '$stop';";
 	$res = $db_handle->query($sql);
 	$row = $res->fetchArray();
 	$cumul_rain_hour_check = $row[0];
@@ -285,7 +285,7 @@ if ($debug=="true") {
 
 // Cumul pluie de la journée
 	$today = strtotime('today midnight');
-	$sql = "SELECT sum(rain) FROM $db_table_sqlite WHERE dateTime >= '$today' AND dateTime <= '$stop';";
+	$sql = "SELECT sum(rain) FROM $db_table_sqlite WHERE dateTime >= '$today' AND dateTime < '$stop';";
 	$res = $db_handle->query($sql);
 	$row = $res->fetchArray();
 	$cumul_rain_today_check = $row[0];
@@ -312,7 +312,7 @@ if ($debug=="true") {
 // Cumul pluie de l'année
 	$yearNow = date('Y');
 	$startYear = strtotime('01-01-'.$yearNow);
-	$sql = "SELECT sum(rain) FROM $db_table_sqlite WHERE dateTime >= '$startYear' AND dateTime <= '$stop';";
+	$sql = "SELECT sum(rain) FROM $db_table_sqlite WHERE dateTime >= '$startYear' AND dateTime < '$stop';";
 	$res = $db_handle->query($sql);
 	$row = $res->fetchArray();
 	$cumul_rain_year_check = $row[0];
@@ -329,7 +329,7 @@ if ($debug=="true") {
 	}
 
 // Intensite pluie max de la journée
-	$sql = "SELECT dateTime, rainRate FROM $db_table_sqlite WHERE dateTime >= '$today' AND dateTime <= '$stop' AND rainRate = (SELECT MAX(rainRate) FROM $db_table_sqlite WHERE dateTime >= '$today' AND dateTime <= '$stop');";
+	$sql = "SELECT dateTime, rainRate FROM $db_table_sqlite WHERE dateTime >= '$today' AND dateTime < '$stop' AND rainRate = (SELECT MAX(rainRate) FROM $db_table_sqlite WHERE dateTime >= '$today' AND dateTime < '$stop');";
 	$res = $db_handle->query($sql);
 	$row = $res->fetchArray();
 	$max_rainRate_today_check = $row[1];
@@ -349,7 +349,7 @@ if ($debug=="true") {
 	}
 
 // Max temp de la journée (fausse Tx puisque de 0h à 24h)
-	$sql = "SELECT dateTime, outTemp FROM $db_table_sqlite WHERE dateTime >= '$today' AND dateTime <= '$stop' AND outTemp = (SELECT MAX(outTemp) FROM $db_table_sqlite WHERE dateTime >= '$today' AND dateTime <= '$stop');";
+	$sql = "SELECT dateTime, outTemp FROM $db_table_sqlite WHERE dateTime >= '$today' AND dateTime < '$stop' AND outTemp = (SELECT MAX(outTemp) FROM $db_table_sqlite WHERE dateTime >= '$today' AND dateTime < '$stop');";
 	$res = $db_handle->query($sql);
 	$row = $res->fetchArray();
 	$max_temp_today_check = $row[1];
@@ -367,7 +367,7 @@ if ($debug=="true") {
 	}
 
 // Min temp de la journée (fausse Tn puisque de 0h à 24h)
-	$sql = "SELECT dateTime, outTemp FROM $db_table_sqlite WHERE dateTime >= '$today' AND dateTime <= '$stop' AND outTemp = (SELECT MIN(outTemp) FROM $db_table_sqlite WHERE dateTime >= '$today' AND dateTime <= '$stop');";
+	$sql = "SELECT dateTime, outTemp FROM $db_table_sqlite WHERE dateTime >= '$today' AND dateTime < '$stop' AND outTemp = (SELECT MIN(outTemp) FROM $db_table_sqlite WHERE dateTime >= '$today' AND dateTime < '$stop');";
 	$res = $db_handle->query($sql);
 	$row = $res->fetchArray();
 	$min_temp_today_check = $row[1];
@@ -503,7 +503,7 @@ if ($debug=="true") {
 
 
 // Récupération et calcul de la vitesse moyenne du vent moyen des 10 dernières minutes
-	$sql = "SELECT AVG(windSpeed) FROM $db_name.$db_table_mysql WHERE dateTime >= '$minutes10' AND dateTime <= '$stop';";
+	$sql = "SELECT AVG(windSpeed) FROM $db_name.$db_table_mysql WHERE dateTime >= '$minutes10' AND dateTime < '$stop';";
 	$res = $con->query($sql);
 	$row = mysqli_fetch_row($res);
 	if($row[0] === null){
@@ -548,7 +548,7 @@ if ($debug=="true") {
 	}
 
 // Récupération des valeurs de direction du vent moyen des 10 dernières minutes
-	$sql = "SELECT windDir FROM $db_name.$db_table_mysql WHERE dateTime >= '$minutes10' AND dateTime <= '$stop';";
+	$sql = "SELECT windDir FROM $db_name.$db_table_mysql WHERE dateTime >= '$minutes10' AND dateTime < '$stop';";
 
 // Requete + mise en tableau de la réponse
 	$windDirArray = array();
@@ -569,7 +569,7 @@ if ($debug=="true") {
 	}
 
 // Détermination de la rafale max des 10 dernières minutes
-	$sql = "SELECT max(windGust) FROM $db_name.$db_table_mysql WHERE dateTime >= '$minutes10' AND dateTime <= '$stop';";
+	$sql = "SELECT max(windGust) FROM $db_name.$db_table_mysql WHERE dateTime >= '$minutes10' AND dateTime < '$stop';";
 	$res = $con->query($sql);
 	$row = mysqli_fetch_row($res);
 	$max_windGust_10_check = $row[0];
@@ -591,7 +591,7 @@ if ($debug=="true") {
  */
 
 // Intensite pluie max sur 1 heure
-	$sql = "SELECT max(rainRate) FROM $db_name.$db_table_mysql WHERE dateTime >= '$minutes60' AND dateTime <= '$stop';";
+	$sql = "SELECT max(rainRate) FROM $db_name.$db_table_mysql WHERE dateTime >= '$minutes60' AND dateTime < '$stop';";
 	$res = $con->query($sql);
 	$row = mysqli_fetch_row($res);
 	$max_rainRate_hour_check = $row[0];
@@ -616,7 +616,7 @@ if ($debug=="true") {
  */
 
 // Cumul pluie sur l'heure glissante
-	$sql = "SELECT SUM(rain) FROM $db_table_mysql WHERE dateTime >= '$minutes60' AND dateTime <= '$stop';";
+	$sql = "SELECT SUM(rain) FROM $db_table_mysql WHERE dateTime >= '$minutes60' AND dateTime < '$stop';";
 	$res = $con->query($sql);
 	$row = mysqli_fetch_row($res);
 	$cumul_rain_hour_check = $row[0];
@@ -635,7 +635,7 @@ if ($debug=="true") {
 
 // Cumul pluie de la journée
 	$today = strtotime('today midnight');
-	$sql = "SELECT SUM(rain) FROM $db_name.$db_table_mysql WHERE dateTime >= '$today' AND dateTime <= '$stop';";
+	$sql = "SELECT SUM(rain) FROM $db_name.$db_table_mysql WHERE dateTime >= '$today' AND dateTime < '$stop';";
 	$res = $con->query($sql);
 	$row = mysqli_fetch_row($res);
 	$cumul_rain_today_check = $row[0];
@@ -662,7 +662,7 @@ if ($debug=="true") {
 // Cumul pluie de l'année
 	$yearNow = date('Y');
 	$startYear = strtotime('01-01-'.$yearNow);
-	$sql = "SELECT SUM(rain) FROM $db_name.$db_table_mysql WHERE dateTime >= '$startYear' AND dateTime <= '$stop';";
+	$sql = "SELECT SUM(rain) FROM $db_name.$db_table_mysql WHERE dateTime >= '$startYear' AND dateTime < '$stop';";
 	$res = $con->query($sql);
 	$row = mysqli_fetch_row($res);
 	$cumul_rain_year_check = $row[0];
@@ -679,7 +679,7 @@ if ($debug=="true") {
 	}
 
 // Intensite pluie max de la journée
-	$sql = "SELECT dateTime, rainRate FROM $db_name.$db_table_mysql WHERE dateTime >= '$today' AND dateTime <= '$stop' AND rainRate = (SELECT MAX(rainRate) FROM $db_name.$db_table_mysql WHERE dateTime >= '$today' AND dateTime <= '$stop');";
+	$sql = "SELECT dateTime, rainRate FROM $db_name.$db_table_mysql WHERE dateTime >= '$today' AND dateTime < '$stop' AND rainRate = (SELECT MAX(rainRate) FROM $db_name.$db_table_mysql WHERE dateTime >= '$today' AND dateTime < '$stop');";
 	$res = $con->query($sql);
 	$row = mysqli_fetch_row($res);
 	$max_rainRate_today_check = $row[1];
@@ -699,7 +699,7 @@ if ($debug=="true") {
 	}
 
 // Max temp de la journée (fausse Tx puisque de 0h à 24h)
-	$sql = "SELECT dateTime, outTemp FROM $db_name.$db_table_mysql WHERE dateTime >= '$today' AND dateTime <= '$stop' AND outTemp = (SELECT MAX(outTemp) FROM $db_name.$db_table_mysql WHERE dateTime >= '$today' AND dateTime <= '$stop');";
+	$sql = "SELECT dateTime, outTemp FROM $db_name.$db_table_mysql WHERE dateTime >= '$today' AND dateTime < '$stop' AND outTemp = (SELECT MAX(outTemp) FROM $db_name.$db_table_mysql WHERE dateTime >= '$today' AND dateTime < '$stop');";
 	$res = $con->query($sql);
 	$row = mysqli_fetch_row($res);
 	$max_temp_today_check = $row[1];
@@ -717,7 +717,7 @@ if ($debug=="true") {
 	}
 
 // Min temp de la journée (fausse Tn puisque de 0h à 24h)
-	$sql = "SELECT dateTime, outTemp FROM $db_name.$db_table_mysql WHERE dateTime >= '$today' AND dateTime <= '$stop' AND outTemp = (SELECT MIN(outTemp) FROM $db_name.$db_table_mysql WHERE dateTime >= '$today' AND dateTime <= '$stop');";
+	$sql = "SELECT dateTime, outTemp FROM $db_name.$db_table_mysql WHERE dateTime >= '$today' AND dateTime < '$stop' AND outTemp = (SELECT MIN(outTemp) FROM $db_name.$db_table_mysql WHERE dateTime >= '$today' AND dateTime < '$stop');";
 	$res = $con->query($sql);
 	$row = mysqli_fetch_row($res);
 	$min_temp_today_check = $row[1];
