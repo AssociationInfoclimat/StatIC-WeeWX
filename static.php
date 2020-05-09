@@ -21,7 +21,7 @@ require_once "config.php";
 
 
 // VERSION - NE PAS MODIFIER !!
-	$version = "weewx-".$db_type."-2.4";
+	$version = "weewx-".$db_type."-2.5";
 
 // Fuseau horaire du script
 	$datetimeNow = date('Y-m-d H:i:s');

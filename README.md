@@ -196,3 +196,7 @@ C'est tout, le script est de nouveau fonctionnel !
 
 * V2.4 - 2019.11.05
 	* Correctif sur le tableau associatif pour la version SQLite --> la version 2.3 du script renvoyait systématiquement une erreur en utilisation avec SQLite.
+
+* V2.5 - 2020-05-09
+	* Les calculs sur 10 minutes/1heure, etc. (>= $start AND <= $stop) n'incluent maintenant plus le $stop (strictement inférieur (<) à $stop). **Evite la double comptabilisation d'un basculement d'auget intevenu par exemple à xxh00 ou xxh10 etc.** (merci @Tempétueux98 et d'autres sur le forum IC pour le signalement)
+	* Correctif sur la direction du vent moyen. **Ne renvoi maintenant plus de valeur si la vitesse moyenne est égale à 0**. (merci @Tempétueux98 sur le forum IC pour le signalement)
