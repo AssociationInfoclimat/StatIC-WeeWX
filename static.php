@@ -213,10 +213,11 @@ if ($debug=="true") {
 	$avg_windDir_10_check = mean_of_angles($windDirArray);
 
 // Vérification du résultat et arrondi
-	if($avg_windDir_10_check === null){
-		$avg_windDir_10 = '';
-	}else{
-		$avg_windDir_10 = round($avg_windDir_10_check,1);
+	$avg_windDir_10 = '';
+	if (!is_null($avg_windDir_10_check)) {
+		if ($avg_wind_10 != 0) { // Si le vent moyen n'est pas égal à 0
+			$avg_windDir_10 = round($avg_windDir_10_check,1);
+		}
 	}
 
 // Détermination de la rafale max des 10 dernières minutes
@@ -562,10 +563,11 @@ if ($debug=="true") {
 	$avg_windDir_10_check = mean_of_angles($windDirArray);
 
 // Vérification du résultat et arrondi
-	if($avg_windDir_10_check === null){
-		$avg_windDir_10 = '';
-	}else{
-		$avg_windDir_10 = round($avg_windDir_10_check,1);
+	$avg_windDir_10 = '';
+	if (!is_null($avg_windDir_10_check)) {
+		if ($avg_wind_10 != 0) { // Si le vent moyen n'est pas égal à 0
+			$avg_windDir_10 = round($avg_windDir_10_check,1);
+		}
 	}
 
 // Détermination de la rafale max des 10 dernières minutes
