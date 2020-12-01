@@ -31,11 +31,14 @@ La fonction utilisée pour la moyenne d'angles est inspirée de : https://gist.g
 ### Installation de git et php
 Git est un logiciel permettant de cloner rapidement les deux fichiers nécessaires au fonctionnement de ce script.
 PHP (php-cli dans notre cas) va permettre d'exécuter le script.
-Il peut également être nécéssaire d'intaller le paquet ``php-sqlite3`` si vous utilisez une base de données SQLite sur votre instance de WeeWX
+Il peut également être nécéssaire d'intaller le paquet ``php-sqlite3`` ou ``php-mysql``si vous utilisez une base de données SQLite ou MySQL sur votre instance de WeeWX
 ```
 sudo apt update && sudo apt install git php-cli
 ## Si utilisation de SQLite, ajouter :
 sudo apt install php-sqlite3
+```
+## Si utilisation de MySQL, ajouter :
+sudo apt install php-mysql
 ```
 ### Copie des fichiers
 Se placer dans un premier temps dans le répertoire ou l'on veut copier le script, puis cloner le répertoire
