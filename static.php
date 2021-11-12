@@ -796,11 +796,26 @@ else {
 		echo "TS Now Comparo FTP IC : ".$timestampNow.PHP_EOL;
 	}
 	if ($timestampNow - $stop < 1200) {
-		$conn_id = ftp_connect($ftp_server) or die("could not connect to $ftp_server");
-		if (!@ftp_login($conn_id, $ftp_username, $ftp_password)) { die("could not connect to infoclimat");}
-		$remote="StatIC_".$id_station.".txt";
-		ftp_put($conn_id, $remote, $file, FTP_ASCII);
-		ftp_close($conn_id);
+		$curl_post_file = curl_file_create($file);
+		$post = array(
+			'file' => $curl_post_file
+		);
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, "https://www.infoclimat.fr/stations/ftp_over_https.php");
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_USERPWD, $ftp_username . ":" . $ftp_password);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$result = curl_exec ($ch);
+		curl_close ($ch);
+
+		if($result['status'] == 'success') {
+			echo "Success uploading to HTTPS server.\n";
+		} else {
+			echo "Error while uploading to HTTPS server. Error code : {$result['status']} \n";
+		}
 	}
 
 ?>
