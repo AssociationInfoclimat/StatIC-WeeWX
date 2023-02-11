@@ -798,6 +798,7 @@ else {
 	if ($timestampNow - $stop < 1200) {
 		$conn_id = ftp_connect($ftp_server) or die("could not connect to $ftp_server");
 		if (!@ftp_login($conn_id, $ftp_username, $ftp_password)) { die("could not connect to infoclimat");}
+		ftp_pasv($conn_id, true);
 		$remote="StatIC_".$id_station.".txt";
 		ftp_put($conn_id, $remote, $file, FTP_ASCII);
 		ftp_close($conn_id);
