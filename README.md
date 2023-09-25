@@ -34,10 +34,13 @@ PHP (php-cli dans notre cas) va permettre d'exécuter le script.
 Il peut également être nécéssaire d'intaller le paquet ``php-sqlite3`` ou ``php-mysql``si vous utilisez une base de données SQLite ou MySQL sur votre instance de WeeWX
 ```
 sudo apt update && sudo apt install git php-cli
+```
 ## Si utilisation de SQLite, ajouter :
+```
 sudo apt install php-sqlite3
 ```
 ## Si utilisation de MySQL, ajouter :
+```
 sudo apt install php-mysql
 ```
 ### Copie des fichiers
